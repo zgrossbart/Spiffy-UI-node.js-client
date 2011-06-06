@@ -68,18 +68,18 @@ var spsample = {
         if (!headers) {
             headers = {};
         }
-        headers['Accept'] = 'application/json';
+        headers.Accept = 'application/json';
         headers['Accept-Charset'] = 'UTF-8';
 
         if (spsample.token) {
             /*
              * We'll add the authentication headers if we have them
              */
-            headers['Authorization'] = spsample.tokenType + ' ' + spsample.token;
+            headers.Authorization = spsample.tokenType + ' ' + spsample.token;
             headers['TS-URL'] = spsample.authServerURL;
         }
 
-        options['headers'] = headers;
+        options.headers = headers;
 
         var f = function(res) {
             if (res.statusCode === 401) {
@@ -114,7 +114,7 @@ var spsample = {
             http.request(options, f).end();
         }
     }
-}
+};
 
 /*
  * Now that we're done defining our object we make the call to 
