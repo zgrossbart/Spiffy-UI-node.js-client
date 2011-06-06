@@ -37,11 +37,26 @@ var spsample = {
         spsample.request(options, function(res) {
             res.setEncoding('utf8');
             res.on('data', function (chunk) {
-                callback(classifiers = JSON.parse(chunk));
+                callback(JSON.parse(chunk));
             });
         }, false);
     },
 
+    /**
+     * The is a simple and reusable request function that can
+     * integrate the correct headers into a request for a Spiffy UI
+     * REST endpoint and call back with the results.
+     * 
+     * This function handles authentication transparently and
+     * completes the call after authentication is completed.
+     * 
+     * @param options The options array for the HTTP call
+     * 
+     * @param callback The function to call back once the request
+     *                 has completed.
+     * @param isSSL True if this connection should use SSL and false
+     *              otherwise
+     */
     request: function(/*array*/ options, /*function*/ callback, /*boolean*/ isSSL) {
 
         /*
@@ -101,6 +116,10 @@ var spsample = {
     }
 }
 
+/*
+ * Now that we're done defining our object we make the call to 
+ * our REST endpoint and get our data. 
+ */
 console.log("Getting sample data from www.spiffyui.org..");
 spsample.getSampleData(function(/*JSON*/ data) {
     console.log('Using your secret token of ' + data.token + ', you received the Spiffy UI secret slogan - ' + data.message);
